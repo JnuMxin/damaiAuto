@@ -24,7 +24,7 @@ driver.get("https://piao.damai.cn/138382.html?spm=a2o6e.search.0.0.2b5328df7CB40
 
 def choose(seletor):
     try:
-        # 用空间可点击时才选定
+        # 控件可点击时才选定
         choice = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, seletor)))
         return choice
     except TimeoutException as e:
@@ -61,6 +61,7 @@ while 1:
                 submit = None
                 # 点击价格
                 while None == price:
+                    # 这里选择的是580票面的，如果要选择其他票面，修改相应的选择器内容即可
                     price = choose("li.itm-oos:nth-child(2)")
                 print(price)
                 price.click()
@@ -76,7 +77,7 @@ while 1:
                 while None == submit:
                     submit = choose("#orderConfirmSubmit")
                 submit.click()
-                    break
+                break
    
 time.sleep(10)
 # driver.quit()
