@@ -12,11 +12,16 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 import time
 
+# 设置抢票链接和开票时间
+URL = "https://piao.damai.cn/138382.html?spm=a2o6e.search.0.0.2b5328df7CB40F"
+HOUR = 11
+MIN  = 18
 
 driver = webdriver.Chrome()
 # 设置等待时间
 wait = WebDriverWait(driver, 5)
-driver.get("https://piao.damai.cn/138382.html?spm=a2o6e.search.0.0.2b5328df7CB40F")
+# 以周杰伦的为例
+driver.get(URL)
 
 # test
 # driver.get("https://piao.damai.cn/141699.html?spm=a2o6e.search.0.0.10f94d15pF81cd")
@@ -34,7 +39,7 @@ def choose(seletor):
         print("Not found!")
         return None
 
-# 登录
+# 点击登录
 login = choose("#userLoginInfo > span > a:nth-child(1)")
 login.click()
 username = choose("#login_email")
@@ -50,18 +55,18 @@ username.send_keys("13112390306")
 time.sleep(10)
 
 while 1:
-    if 11 == time.localtime().tm_hour:
+    if HOUR == time.localtime().tm_hour:
         while 1:
-            if 18 == time.localtime().tm_min:
+            if MIN == time.localtime().tm_min:
                 print("开始抢票")
-                driver.get("https://piao.damai.cn/138382.html?spm=a2o6e.search.0.0.2b5328df7CB40F")
+                driver.get(URL)
                 price = None
                 plus = None
                 buybtn = None
                 submit = None
                 # 点击价格
                 while None == price:
-                    # 这里选择的是580票面的，如果要选择其他票面，修改相应的选择器内容即可
+                    # 这里选的是580票面的，如果选其他票面，修改对应的选择器内容即可
                     price = choose("li.itm-oos:nth-child(2)")
                 print(price)
                 price.click()
