@@ -55,7 +55,7 @@ def login():
     password = choose('//*[@id="login_pwd_txt"]')
     try:
         password.click()
-        password.send_keys("haobang058")
+        password.send_keys("********")
     except Exception:
         print(password)
         print("Password Can't click")
